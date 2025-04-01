@@ -1,0 +1,12 @@
+.contact-bar {
+    background-color: #f8f9fa;
+    text-align: center;
+    padding: 20px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.contact-bar p {
+    color: #333;
+    font-size: 16px;
+}

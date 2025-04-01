@@ -1,0 +1,66 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #3b3a3a;
+  padding: 15px 30px;
+}
+
+.left-section {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  text-decoration: none; 
+  font-size: 30px;
+  display: block;
+  text-align: center;
+  font-weight: bold;
+  color: white;
+  margin-right: 30px; /* Increased gap */
+}
+
+
+.sitter-link {
+  color: white;
+  margin-left: 35px;
+  font-size: 18px;
+  font-weight: bold;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+.tagline {
+  position: absolute;
+  font-size: 16px; /* Reduce font size */
+  font-weight: normal;
+  margin-top: -5px; /* Reduce space if it's too far */
+  text-align: center;
+  display: block;
+  top: 60px;
+  left: 15px;
+  font-size: 14px;
+  color: white;
+}
+
+.nav-links a {
+  color: white;
+  font-size: 18px;
+  margin-left: 15px;
+  font-weight: bold;
+  text-decoration: none;
+  margin-right: 15px;  /* Adjust spacing as needed */
+  
+}
+.banner-text {
+  width: 60%; /* Adjust as needed */
+  margin: auto;
+  text-align: center;
+}
+.banner-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}

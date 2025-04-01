@@ -1,0 +1,117 @@
+.sitter-container {
+    max-width: 650px;
+    margin: 40px auto;
+    padding: 20px;
+    border-radius: 8px;
+    background: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.sitter-container h2 {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.sitter-quote {
+    text-align: center;
+    font-style: italic;
+    color: #555;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+.sitter-form .form-group {
+    margin-bottom: 15px;
+}
+
+.sitter-form label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.sitter-form input,
+.sitter-form textarea,
+.sitter-form select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.sitter-form textarea {
+    height: 80px;
+}
+
+.sitter-form .form-group-inline {
+    display: flex;
+    justify-content: space-between;
+}
+
+.sitter-form .form-group-inline .form-group {
+    flex: 1;
+    margin-right: 10px;
+}
+
+.sitter-form .form-group-inline .form-group:last-child {
+    margin-right: 0;
+}
+
+.checkbox-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.checkbox-item {
+    display: flex;
+    align-items: center;
+}
+
+.checkbox-item input[type="checkbox"] {
+    margin-right: 8px;
+    width: 16px;
+    height: 16px;
+}
+
+.checkbox-item label {
+    font-size: 14px;
+    margin-bottom: 0;
+}
+
+.radio-group {
+    display: flex;
+    gap: 15px;
+    margin-top: 5px;
+}
+
+.radio-group label {
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.radio-group input[type="radio"] {
+    margin-right: 5px;
+}
+
+.form-actions {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.form-actions button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background: #007bff;
+    color: white;
+    transition: 0.3s;
+}
+
+.form-actions button:hover {
+    background: #0056b3;
+}

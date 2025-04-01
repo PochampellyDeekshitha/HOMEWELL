@@ -1,0 +1,19 @@
+.service-container {
+    text-align: center;
+    padding: 50px 20px;
+}
+
+.book-btn {
+    background-color: #28a745;
+    color: white;
+    padding: 12px 24px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.book-btn:hover {
+    background-color: #218838;
+}
