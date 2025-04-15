@@ -1,122 +1,71 @@
-/* Centering page without navbar */
-.auth-page {
+/* signup.css */
+
+.signup-page {
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background-color: #ffffff;
-}
-
-/* Sign-up box */
-.auth-container {
-    background-color: #fdfafa;
-    padding: 40px;
-    border-radius: 25px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 500px;
+    background: linear-gradient(to bottom right, #f1f4f8, #dff0ff);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 1rem;
+  }
+  
+  .signup-container {
+    background-color: #fff;
+    padding: 2rem 2.5rem;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 420px;
+  }
+  
+  .signup-title {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #2c3e50;
     text-align: center;
-}
-
-/* Heading */
-.auth-container h2 {
-    margin-bottom: 30px;
-    font-size: 40px;
-    color: #000000;
-}
-
-/* Input fields */
-.auth-container input {
-    width: calc(100% - 22px);
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #cccccc;
-    border-radius: 10px;
-    font-size: 16px;
-}
-
-/* Sign-up button */
-.auth-btn {
-    width: 100%;
-    padding: 12px;
-    border: none;
-    border-radius: 25px;
-    font-size: 16px;
-    cursor: pointer;
-    background-color: #1877F2;  /* Green button */
-    color: #ffffff;
-    margin-bottom: 15px;
-}
-
-.auth-btn:hover {
-    background-color: #145DBF;  /* Darker green on hover */
-}
-
-/* Social login buttons */
-.social-btn {
-    width: 100%;
-    padding: 12px;
-    border: none;
-    border-radius: 25px;
-    font-size: 16px;
-    cursor: pointer;
-    margin-bottom: 10px;
+    margin-bottom: 1.5rem;
+  }
+  
+  .signup-form {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #ffffff;
-}
-
-.social-btn img {
-    height: 20px;
-    margin-right: 8px;
-}
-
-/* Google Button */
-.google-btn {
-    background-color: #f3f7fc;
-    color: rgb(0, 0, 0); 
-}
-
-
-
-/* Separator */
-.separator {
-    margin: 20px 0;
-    font-size: 14px;
-    color: #888;
-}
-
-.terms a {
-    font-size: 19px;  /* Adjusted link size */
-    color: rgb(0, 81, 255);
-}
-
-/* Already have an account */
-.no-account {
-    font-size: 17px;
-    color: #333;
-    margin-top: 10px;
-}
-
-.no-account a {
-    font-size: 18px;
-    color: #1877F2;
-}
-
-.no-account a:hover {
-    text-decoration: underline;
-}
-
-/* Back to home link */
-.back-home {
-    display: inline-block;
-    margin-top: 15px;
-    font-size: 19px;
-    font-weight: bold;
-    color: #1877F2;
-    text-decoration: none;
-}
-
-.back-home:hover {
-    text-decoration: underline;
-}
+    flex-direction: column;
+    gap: 0.9rem;
+  }
+  
+  .signup-input {
+    padding: 0.75rem;
+    border: 1px solid #dcdde1;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border 0.2s ease;
+  }
+  
+  .signup-input:focus {
+    border-color: #3498db;
+    outline: none;
+    background-color: #f7fbff;
+  }
+  
+  .signup-button {
+    padding: 0.8rem;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .signup-button:hover {
+    background-color: #2980b9;
+  }
+  
+  .signup-message {
+    margin-top: 1rem;
+    text-align: center;
+    color: #e74c3c;
+    font-weight: 500;
+  }

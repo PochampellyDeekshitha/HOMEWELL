@@ -1,91 +1,141 @@
-import React from "react";
-import { Helmet } from "react-helmet";
-import { Link } from "react-router-dom";
-import { useGoogleLogin } from "@react-oauth/google";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "../styles/signup.css";
 
-const SignUp = () => {
-  // Function to handle Google Sign-Up
-  const handleGoogleSignUp = useGoogleLogin({
-    onSuccess: async (tokenResponse) => {
-      try {
-        const response = await fetch("https://www.googleapis.com/oauth2/v3/userinfo", {
-          headers: {
-            Authorization: `Bearer ${tokenResponse.access_token}`,
-          },
-        });
-        const userInfo = await response.json();
-
-        // Send the user info to your backend for sign-up
-        const res = await fetch("/api/signup", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            googleId: userInfo.sub, // Unique ID for the Google user
-            name: userInfo.name,
-            email: userInfo.email,
-          }),
-        });
-
-        if (res.ok) {
-          console.log("User signed up successfully!");
-        } else {
-          console.error("Failed to sign up the user");
-        }
-      } catch (err) {
-        console.error("Google sign-up error:", err);
-      }
-    },
-    onError: () => {
-      console.log("Google Sign-Up Failed!");
-    },
+export default function SignUp() {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+    role: "searchSitter", // Default is 'searchSitter'
   });
 
+  const [message, setMessage] = useState("");
+  const navigate = useNavigate();
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const { password, confirmPassword } = formData;
+
+    // Validation
+    if (password.length < 8) {
+      setMessage("Password must be at least 8 characters long.");
+      return;
+    }
+
+    const uppercaseRegex = /[A-Z]/;
+    const specialCharRegex = /[!@#$%^&*(),.?":{}|<>]/;
+
+    if (!uppercaseRegex.test(password)) {
+      setMessage("Password must include at least one uppercase letter.");
+      return;
+    }
+
+    if (!specialCharRegex.test(password)) {
+      setMessage("Password must include at least one special character.");
+      return;
+    }
+
+    if (password !== confirmPassword) {
+      setMessage("Passwords do not match.");
+      return;
+    }
+
+    // Prepare data to send
+    const { confirmPassword: _, ...dataToSend } = formData;
+
+    try {
+      const response = await fetch("http://localhost:5000/api/auth/signup", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(dataToSend),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        setMessage(data.message || "Signup failed.");
+        return;
+      }
+
+      setMessage(data.message);
+
+      // Redirect based on role
+      if (formData.role === "searchSitter") {
+        setTimeout(() => navigate("/search-sitter"), 1500); // Redirect to Search Sitter page
+      } else {
+        // Redirect to other pages, e.g., Profile or Dashboard
+        setTimeout(() => navigate("/profile"), 1500); // Example
+      }
+    } catch (error) {
+      setMessage("Error: " + error.message);
+    }
+  };
+
   return (
-    <div className="auth-page">
-      {/* Helmet for setting favicon and title dynamically */}
-      <Helmet>
-        <title>HomeWell - SignUp</title>
-        <link rel="icon" href="/signup-favicon.ico" />
-      </Helmet>
+    <div className="signup-page">
+      <div className="signup-container">
+        <h2 className="signup-title">Create a HomeWell Account</h2>
+        <form onSubmit={handleSubmit} className="signup-form">
+          <input
+            type="text"
+            name="name"
+            placeholder="Full Name"
+            value={formData.name}
+            onChange={handleChange}
+            className="signup-input"
+            required
+          />
+          <input
+            type="email"
+            name="email"
+            placeholder="Email Address"
+            value={formData.email}
+            onChange={handleChange}
+            className="signup-input"
+            required
+          />
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            value={formData.password}
+            onChange={handleChange}
+            className="signup-input"
+            required
+          />
+          <input
+            type="password"
+            name="confirmPassword"
+            placeholder="Confirm Password"
+            value={formData.confirmPassword}
+            onChange={handleChange}
+            className="signup-input"
+            required
+          />
 
-      <div className="auth-container">
-        <h2>Sign Up for HomeWell</h2>
+          {/* Dropdown to select role (Become a sitter / Search a sitter) */}
+          <select
+            name="role"
+            value={formData.role}
+            onChange={handleChange}
+            className="signup-input"
+            required
+          >
+            <option value="searchSitter">Search a Sitter</option>
+            <option value="becomeSitter">Become a Sitter</option>
+          </select>
 
-        {/* Google Sign-Up Button */}
-        <button className="social-btn google-btn" onClick={handleGoogleSignUp}>
-          <img src="/images/google_logo.png" alt="Google Logo" />
-          Continue with Google
-        </button>
-
-        <div className="separator">─ or ─</div>
-
-        <input type="text" placeholder="Email" />
-        <input type="password" placeholder="Password" />
-        <input type="password" placeholder="Confirm Password" />
-
-        <button className="auth-btn">Sign Up</button>
-
-        <p className="terms">
-          By signing up, I agree to the HomeWell{" "}
-          <Link to="#">Terms of Service</Link> and{" "}
-          <Link to="#">Privacy Statement</Link>. I consent to receive marketing
-          emails and messages from HomeWell and its affiliates, and confirm that
-          I am 18 years of age or older.
-        </p>
-
-        <p className="no-account">
-          Already have an account? <Link to="/signin">Sign In</Link>
-        </p>
-
-        <Link to="/" className="back-home">
-          Back to Home
-        </Link>
+          <button type="submit" className="signup-button">Sign Up</button>
+        </form>
+        {message && <p className="signup-message">{message}</p>}
       </div>
     </div>
   );
-};
-
-export default SignUp;
+}

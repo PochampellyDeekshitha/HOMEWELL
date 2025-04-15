@@ -1,0 +1,64 @@
+/* styles/OtherAnimalProfileForm.css */
+.other-profile-container {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 25px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.15);
+  }
+  
+  .other-profile-container h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+    text-transform: capitalize;
+  }
+  
+  .other-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .other-form label {
+    display: flex;
+    flex-direction: column;
+    font-weight: bold;
+    color: #444;
+  }
+  
+  .other-form input,
+  .other-form select {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    height: 40px; /* ✅ Fix: limit height for inputs */
+    box-sizing: border-box;
+  }
+  
+  .other-form textarea {
+    min-height: 80px;
+    resize: vertical;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+  }
+  
+  .other-form button {
+    padding: 12px;
+    background-color: #118341;
+    color: #fff;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .other-form button:hover {
+    background-color: #1f8a4d;
+  }
+  

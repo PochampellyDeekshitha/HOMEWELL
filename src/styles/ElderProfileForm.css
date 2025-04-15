@@ -1,0 +1,63 @@
+.elder-profile-form-container {
+    max-width: 800px;
+    margin: 30px auto;
+    padding: 25px;
+    background-color: #f8f9fa;
+    border-radius: 20px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    font-family: 'Segoe UI', sans-serif;
+  }
+  
+  .elder-profile-form h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  .elder-profile-form fieldset {
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 15px 20px;
+    margin-bottom: 20px;
+    background-color: #ffffff;
+  }
+  
+  .elder-profile-form legend {
+    font-weight: bold;
+    padding: 0 10px;
+    color: #333;
+  }
+  
+  .elder-profile-form input,
+  .elder-profile-form select,
+  .elder-profile-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+  }
+  
+  .elder-profile-form textarea {
+    min-height: 60px;
+    resize: vertical;
+  }
+  
+  .elder-profile-form button {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #118341;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  .elder-profile-form button:hover {
+    background-color: #1f8a4d;
+  }
+  

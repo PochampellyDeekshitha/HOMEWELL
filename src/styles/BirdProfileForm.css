@@ -1,0 +1,73 @@
+.bird-profile-form-container {
+    max-width: 750px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    font-family: 'Segoe UI', sans-serif;
+  }
+  
+  .bird-profile-form h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #2d2d2d;
+  }
+  
+  .section-card {
+    background-color: #ffffff;
+    padding: 20px 25px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    margin-bottom: 30px;
+  }
+  
+  .section-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .section-title span {
+    margin-right: 10px;
+    font-size: 20px;
+  }
+  
+  .bird-profile-form label {
+    display: block;
+    margin-bottom: 15px;
+  }
+  
+  .bird-profile-form input,
+  .bird-profile-form select {
+    width: 100%;
+    padding: 10px 14px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 14px;
+    background-color: #fff;
+  }
+  
+  .bird-profile-form input[type="file"] {
+    padding: 8px;
+  }
+  
+  .bird-profile-form button {
+    width: 100%;
+    padding: 12px;
+    background-color: #118341;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    margin-top: 20px;
+    cursor: pointer;
+  }
+  
+  .bird-profile-form button:hover {
+    background-color: #1f8a4d;
+  }
+  

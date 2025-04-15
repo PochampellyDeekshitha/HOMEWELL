@@ -1,0 +1,59 @@
+.rabbit-profile-form {
+    max-width: 700px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: #fefefe;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    font-family: 'Segoe UI', sans-serif;
+  }
+  
+  .rabbit-profile-form h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: #333;
+  }
+  
+  .rabbit-profile-form form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  .rabbit-profile-form fieldset {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 1rem 1.5rem;
+  }
+  
+  .rabbit-profile-form legend {
+    padding: 0 10px;
+    font-weight: bold;
+    color: #444;
+  }
+  
+  .rabbit-profile-form input {
+    display: block;
+    width: 100%;
+    padding: 0.6rem 1rem;
+    margin-top: 0.7rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+  }
+  
+  .rabbit-profile-form button {
+    padding: 0.75rem 1rem;
+    background-color: #118341;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  .rabbit-profile-form button:hover {
+    background-color: #1f8a4d;
+  }
+  

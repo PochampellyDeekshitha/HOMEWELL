@@ -3,16 +3,15 @@ import "../styles/auth.css";
 
 const BecomeSitter = () => {
   const [formData, setFormData] = useState({
-    
     fullName: "",
     age: "",
     phone: "",
     email: "",
     profilePicture: null,
     aadhaarPhoto: null,
+    certificationPicture: null,
     bio: "",
     experience: "",
-    certifications: "",
     availability: "",
     location: "",
     services: [],
@@ -21,11 +20,12 @@ const BecomeSitter = () => {
     profileVisibility: "Private",
     maxDistance: "",
     alternateContact: "",
+    houseCheck: "",
   });
-  
 
   const handleChange = (e) => {
     const { name, value, type, checked, files } = e.target;
+
     if (type === "checkbox") {
       setFormData({
         ...formData,
@@ -35,15 +35,48 @@ const BecomeSitter = () => {
       });
     } else if (type === "file") {
       setFormData({ ...formData, [name]: files[0] });
+    } else if (type === "radio") {
+      setFormData({ ...formData, [name]: value });
     } else {
       setFormData({ ...formData, [name]: value });
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Sitter Profile Data:", formData);
-    // Handle form submission logic here (e.g., send data to an API)
+
+    const formDataToSubmit = new FormData();
+
+    // Append the form data
+    for (const key in formData) {
+      if (formData[key]) {
+        if (Array.isArray(formData[key])) {
+          formData[key].forEach((item) => {
+            formDataToSubmit.append(key, item);
+          });
+        } else {
+          formDataToSubmit.append(key, formData[key]);
+        }
+      }
+    }
+
+    try {
+      const response = await fetch('http://localhost:5000/api/sitters/create', {
+        method: "POST",
+        body: formDataToSubmit,
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        alert("Profile saved successfully!");
+      } else {
+        alert(result.message || "Failed to save profile.");
+      }
+    } catch (err) {
+      console.error(err);
+      alert("There was an error while submitting the form.");
+    }
   };
 
   return (
@@ -130,9 +163,14 @@ const BecomeSitter = () => {
             required
           />
         </div>
+
         <div className="form-group">
-            <label>Certifications:</label>
-            <input type="file" name="CertificationPicture" onChange={handleChange} />
+          <label>Certifications:</label>
+          <input
+            type="file"
+            name="CertificationPicture"
+            onChange={handleChange}
+          />
         </div>
 
         <div className="form-group">
@@ -216,31 +254,30 @@ const BecomeSitter = () => {
           </select>
         </div>
 
-
-          <div className="form-group">
-            <label>Are you okay with your house being checked?</label>
-            <div className="radio-group">
-              <label>
-                <input
-                  type="radio"
-                  name="houseCheck"
-                  value="Yes"
-                  onChange={handleChange}
-                />{" "}
-                Yes
-              </label>
-              <label>
-                <input
-                  type="radio"
-                  name="houseCheck"
-                  value="No"
-                  onChange={handleChange}
-                />{" "}
-                No
-              </label>
-            </div>
+        <div className="form-group">
+          <label>Are you okay with your house being checked?</label>
+          <div className="radio-group">
+            <label>
+              <input
+                type="radio"
+                name="houseCheck"
+                value="Yes"
+                onChange={handleChange}
+              />{" "}
+              Yes
+            </label>
+            <label>
+              <input
+                type="radio"
+                name="houseCheck"
+                value="No"
+                onChange={handleChange}
+              />{" "}
+              No
+            </label>
           </div>
-        
+        </div>
+
         <div className="form-group">
           <label>Payment Methods:</label>
           <div className="checkbox-group">

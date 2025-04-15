@@ -29,9 +29,10 @@ p {
 .sitter-option {
   padding: 10px 20px;
   font-size: 16px;
-  border: 2px solid #ddd;
+  border: 2px solid #000000 ;
+  color: #000000;
   border-radius: 5px;
-  background: #f9f9f9;
+  background: #E6F4EA ;
   cursor: pointer;
   transition: 0.3s;
 }
@@ -61,7 +62,7 @@ p {
   width: 100%;
   padding: 10px;
   font-size: 16px;
-  border: 2px solid #ddd;
+  border: 2px solid #dddddd;
   border-radius: 5px;
   cursor: pointer;
 }

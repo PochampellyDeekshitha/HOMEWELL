@@ -48,11 +48,11 @@ const About = () => {
                 <h3>💬 What Our Users Say</h3>
                 <div className="testimonial">
                     <p>"HomeWell helped me find a loving sitter for my elderly mother. Their service is outstanding!"</p>
-                    <p className="user-name">- John D.</p>
+                    
                 </div>
                 <div className="testimonial">
                     <p>"I travel frequently, and knowing my plants and pets are cared for gives me peace of mind. Highly recommend!"</p>
-                    <p className="user-name">- Sarah T.</p>
+                    
                 </div>
             </div>
 

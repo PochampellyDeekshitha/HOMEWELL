@@ -1,75 +1,153 @@
-import React, { useEffect } from "react";
+import React, { useState } from "react";
+import { GoogleLogin } from "@react-oauth/google";
 import { Helmet } from "react-helmet";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../styles/signin.css";
 
 const SignIn = () => {
-  useEffect(() => {
-    // Initialize Google Sign-In
-    const initializeGoogleSignIn = () => {
-      if (window.google) {
-        window.google.accounts.id.initialize({
-          client_id: "377906248140-vh628eiuhj29b2lfsvpsc2vjqk9viise.apps.googleusercontent.com", // Replace with your actual client ID
-          callback: handleCredentialResponse,
-        });
+  const navigate = useNavigate();
 
-        window.google.accounts.id.renderButton(
-          document.getElementById("googleSignInButton"),
-          {
-            theme: "outline",
-            size: "large",
-          }
-        );
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [message, setMessage] = useState("");
+
+  // ✅ Password Validation
+  const isPasswordValid = (pwd) => {
+    const uppercaseRegex = /[A-Z]/;
+    const specialCharRegex = /[!@#$%^&*(),.?":{}|<>]/;
+    return (
+      pwd.length >= 8 &&
+      uppercaseRegex.test(pwd) &&
+      specialCharRegex.test(pwd)
+    );
+  };
+
+  // ✅ Traditional Email/Password Sign-In
+  const handleTraditionalSignIn = async () => {
+    setMessage("");
+
+    if (!isPasswordValid(password)) {
+      setMessage(
+        "Password must be at least 8 characters, include one uppercase letter, and one special character."
+      );
+      return;
+    }
+
+    try {
+      const res = await fetch("http://localhost:5000/api/auth/signin", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        alert("✅ Sign-In Successful");
+        navigate("/");
+      } else {
+        alert(data.message || "❌ Sign-In failed");
       }
-    };
+    } catch (error) {
+      console.error("❌ Error:", error.message);
+      alert("Something went wrong during sign-in");
+    }
+  };
 
-    initializeGoogleSignIn();
-  }, []);
+  // ✅ Google Sign-In
+  const handleSuccess = async (credentialResponse) => {
+    const token = credentialResponse.credential;
 
-  // Handle Google Sign-In response
-  const handleCredentialResponse = (response) => {
-    console.log("Google JWT Token:", response.credential);
-    // TODO: Send the JWT token to your backend for verification and authentication
+    try {
+      const res = await fetch("http://localhost:5000/api/auth/google/token", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ token }),
+      });
+
+      const contentType = res.headers.get("content-type");
+
+      if (contentType && contentType.includes("application/json")) {
+        const data = await res.json();
+
+        if (res.ok) {
+          alert("✅ Google Sign-In Successful");
+          console.log("User Data:", data.user);
+          navigate("/dashboard");
+        } else {
+          alert("❌ Google sign-in failed on backend");
+          console.error("Backend error:", data);
+        }
+      } else {
+        const errorText = await res.text();
+        console.error("❌ Backend returned non-JSON response:", errorText);
+        alert("Something went wrong. Check console for backend error.");
+      }
+    } catch (error) {
+      console.error("❌ Error:", error.message);
+      alert("Something went wrong during Google sign-in");
+    }
   };
 
   return (
     <div className="auth-page">
-      {/* Helmet for setting favicon and title dynamically */}
       <Helmet>
-        <title>HomeWell - SignIn</title>
+        <title>HomeWell - Sign In</title>
         <link rel="icon" href="/signin-favicon.ico" />
       </Helmet>
 
       <div className="auth-container">
         <h2>Sign In to HomeWell</h2>
 
-        {/* Google Sign-In Button */}
-        <div id="googleSignInButton" className="google-signin-btn"></div>
-
-        
+        {/* ✅ Google Sign-In Button */}
+        <GoogleLogin
+          onSuccess={handleSuccess}
+          onError={() => {
+            console.log("Google Sign-In failed");
+            alert("Google Signin Failed");
+          }}
+        />
 
         <div className="separator">─ or ─</div>
 
-        <input type="text" placeholder="Email" />
-        <input type="password" placeholder="Password" />
+        {/* ✅ Traditional Email/Password Sign In */}
+        <input
+          type="text"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
 
-        <button className="auth-btn">Sign In</button>
+        <input
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+
+        <button className="auth-btn" onClick={handleTraditionalSignIn}>
+          Sign In
+        </button>
+
+        {message && <p className="signin-message">{message}</p>}
 
         <p className="terms">
-          By signing up, I agree to the HomeWell{" "}
+          By signing in, I agree to the HomeWell{" "}
           <Link to="#">Terms of Service</Link> and{" "}
-          <Link to="#">Privacy Statement</Link>. I consent to receive marketing
-          emails and messages from HomeWell and its affiliates, and confirm that
-          I am 18 years of age or older.
+          <Link to="#">Privacy Statement</Link>.
         </p>
 
-        <Link to="#" className="forgot-password">Forgot password?</Link>
+        <Link to="#" className="forgot-password">
+          Forgot password?
+        </Link>
 
         <p className="no-account">
           Don't have an account? <Link to="/signup">Sign Up</Link>
         </p>
 
-        <Link to="/" className="back-home">Back to Home</Link>
+        <Link to="/" className="back-home">
+          Back to Home
+        </Link>
       </div>
     </div>
   );

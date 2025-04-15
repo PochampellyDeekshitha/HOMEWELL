@@ -1,135 +1,93 @@
-/* Centering page without navbar */
-.auth-page {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background-color: #ffffff;
-  }
-  
-  /* Sign-in box */
-  .auth-container {
-    background-color: #fdfafa;
-    padding: 40px;
-    border-radius: 25px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 500px;
-    text-align: center;
-  }
-  
-  /* Heading */
-  .auth-container h2 {
-    margin-bottom: 30px;
-    font-size: 40px;
-    color: #000000;
-  }
-  
-  /* Input fields */
-  .auth-container input {
-    width: calc(100% - 22px);
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #cccccc;
-    border-radius: 10px;
-    font-size: 16px;
-  }
-  
-  /* Sign-in button */
-  .auth-btn {
-    width: 100%;
-    padding: 12px;
-    border: none;
-    border-radius: 25px;
-    font-size: 16px;
-    cursor: pointer;
-    background-color: #1877F2;
-    color: #ffffff;
-    margin-bottom: 15px;
-  }
-  
-  .auth-btn:hover {
-    background-color: #145DBF;
-  }
-  
-  /* Social login buttons */
-  .social-btn {
-    width: 100%;
-    padding: 12px;
-    border: none;
-    border-radius: 25px;
-    font-size: 16px;
-    cursor: pointer;
-    margin-bottom: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #ffffff;
-  }
-  
-  .social-btn img {
-    height: 20px;
-    margin-right: 8px;
-  }
-  
+/* signin.css */
 
-  
-  .google-btn {
-    background-color: #4285F4;
-  }
-  
- 
-  
-  /* Separator */
-  .separator {
-    margin: 20px 0;
-    font-size: 14px;
-    color: #888;
-  }
-  .terms a {
-    font-size: 19px; /* Links inside the terms */
-    color: rgb(0, 81, 255);
-  }
-  
-  /* Forgot password */
-  .forgot-password {
-    font-size: 19px;
-    color: #1877F2;
-    text-decoration: none;
-    display: block;
-    margin-top: 10px;
-  }
-  
-  .forgot-password:hover {
-    text-decoration: underline;
-  }
-  
-  /* No account text */
-  .no-account {
-    font-size: 16px;
-    color: #333;
-    margin-top: 10px;
-  }
-  
-  .no-account a {
-    font-size: 18px; /* Adjust for 'Sign Up' link */
-    color: #1877F2;
-  }
-  
-  .no-account a:hover {
-    text-decoration: underline;
-  }
-  
-  /* Back to home link */
-  .back-home {
-    display: inline-block;
-    margin-top: 15px;
-    font-size: 19px;
-    font-weight: bold;
-    color: #1877F2;
-    text-decoration: none;
-  }
-  
-  .back-home:hover {
-    text-decoration: underline;
-  }
-  
+.auth-page {
+  min-height: 100vh;
+  background: linear-gradient(to bottom right, #f5f7fa, #c3cfe2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.auth-container {
+  background: #fff;
+  padding: 2.5rem 3rem;
+  border-radius: 20px;
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.1);
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.auth-container h2 {
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  color: #333;
+}
+
+input {
+  width: 100%;
+  padding: 12px 14px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+input:focus {
+  border-color: #4a90e2;
+  outline: none;
+}
+
+.auth-btn {
+  width: 100%;
+  padding: 12px;
+  background-color: #4a90e2;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.auth-btn:hover {
+  background-color: #357ab8;
+}
+
+.separator {
+  margin: 20px 0;
+  color: #aaa;
+  font-size: 0.9rem;
+}
+
+.terms,
+.no-account,
+.back-home {
+  font-size: 0.85rem;
+  color: #666;
+  margin-top: 15px;
+}
+
+.terms a,
+.no-account a,
+.back-home {
+  color: #4a90e2;
+  text-decoration: none;
+}
+
+.forgot-password {
+  display: block;
+  margin-top: 10px;
+  font-size: 0.85rem;
+  color: #4a90e2;
+  text-decoration: none;
+}
+
+.signin-message {
+  color: red;
+  font-size: 0.9rem;
+  margin-top: 10px;
+}

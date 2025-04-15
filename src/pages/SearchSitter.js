@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "../styles/searchSitter.css"; // Ensure correct CSS file is linked
+import "../styles/searchSitter.css";
 
 const SearchSitter = () => {
     const [selectedSitters, setSelectedSitters] = useState([]);
-    const [animalType, setAnimalType] = useState(""); // Start as empty to force selection
-    const [customAnimal, setCustomAnimal] = useState(""); // State to store custom animal
+    const [animalType, setAnimalType] = useState("");
+    const [customAnimal, setCustomAnimal] = useState("");
     const navigate = useNavigate();
 
     const sitterOptions = [
@@ -16,11 +16,9 @@ const SearchSitter = () => {
     ];
 
     const handleSitterSelection = (id) => {
-        if (selectedSitters.includes(id)) {
-            setSelectedSitters(selectedSitters.filter((sitter) => sitter !== id));
-        } else {
-            setSelectedSitters([...selectedSitters, id]);
-        }
+        setSelectedSitters((prev) =>
+            prev.includes(id) ? prev.filter((s) => s !== id) : [...prev, id]
+        );
     };
 
     const handleNext = () => {
@@ -29,20 +27,23 @@ const SearchSitter = () => {
             return;
         }
 
-        if (selectedSitters.includes("pets") && !animalType && customAnimal === "") {
-            alert("Please select or specify an animal type.");
-            return;
-        }
-
-        let profilePaths = selectedSitters.map((sitter) => {
-            if (sitter === "pets") {
-                // Use custom animal if "Other" is selected
-                return `create-profile/pets/${animalType === "Other" ? customAnimal.toLowerCase() : animalType.toLowerCase()}`;
+        if (selectedSitters.includes("pets")) {
+            if (!animalType) {
+                alert("Please select or specify an animal type.");
+                return;
             }
-            return `create-profile/${sitter.toLowerCase()}`;
-        });
 
-        navigate(`/${profilePaths[0]}`);
+            if (animalType === "Other" && !customAnimal.trim()) {
+                alert("Please specify the animal type.");
+                return;
+            }
+
+            const animalPath = animalType === "Other" ? customAnimal.toLowerCase().replace(/\s+/g, "-") : animalType.toLowerCase();
+            navigate(`/create-profile/pets/${animalPath}`);
+        } else {
+            const sitter = selectedSitters[0]; // Navigate to the first selected type
+            navigate(`/create-profile/${sitter}`);
+        }
     };
 
     return (
@@ -70,7 +71,7 @@ const SearchSitter = () => {
                         onChange={(e) => {
                             setAnimalType(e.target.value);
                             if (e.target.value !== "Other") {
-                                setCustomAnimal(""); // Reset custom animal if not "Other"
+                                setCustomAnimal("");
                             }
                         }}
                     >
