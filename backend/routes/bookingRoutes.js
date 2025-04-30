@@ -5,22 +5,22 @@ const Booking = require('../models/Booking');
 // Create a new booking
 router.post('/', async (req, res) => {
   try {
-    const booking = new Booking(req.body);
+    const { sitterId, userId, serviceType, startDate, endDate, totalAmount } = req.body;
+    const booking = new Booking({ sitterId, userId, serviceType, startDate, endDate, totalAmount });
     await booking.save();
-    res.status(201).json({ message: 'Booking successful', booking });
-  } catch (err) {
-    console.error('Error saving booking:', err);
-    res.status(500).json({ error: 'Failed to create booking' });
+    res.status(201).json({ message: 'Booking created successfully', booking });
+  } catch (error) {
+    res.status(500).json({ message: 'Error creating booking', error: error.message });
   }
 });
 
-// (Optional) Get all bookings
+// ✅ Get all bookings
 router.get('/', async (req, res) => {
   try {
-    const bookings = await Booking.find().populate('sitterId');
-    res.json(bookings);
-  } catch (err) {
-    res.status(500).json({ error: 'Failed to fetch bookings' });
+    const bookings = await Booking.find().populate('sitterId').populate('userId');
+    res.status(200).json(bookings);
+  } catch (error) {
+    res.status(500).json({ message: 'Error fetching bookings', error: error.message });
   }
 });
 

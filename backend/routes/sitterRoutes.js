@@ -5,7 +5,6 @@ const Sitter = require('../models/Sitter');
 const Booking = require('../models/Booking');
 const upload = require('../middleware/upload');
 const { getSittersByService } = require('../controllers/sitterController');
-app.use('/api/sitters', sitterRoutes);
 
 // ✅ Get all sitters or filter by service/category
 router.get('/', async (req, res) => {
@@ -125,7 +124,6 @@ router.put(
       sitter.alternateContact = body.alternateContact || sitter.alternateContact;
       sitter.houseCheck = body.houseCheck || sitter.houseCheck;
 
-      // Replace uploaded files
       if (req.files?.profilePicture) {
         if (sitter.profilePicture && fs.existsSync(sitter.profilePicture)) fs.unlinkSync(sitter.profilePicture);
         sitter.profilePicture = req.files.profilePicture[0].path;
@@ -181,26 +179,7 @@ router.post('/booking', async (req, res) => {
   }
 });
 
-// ✅ Get sitters by individual service (filtered route)
+// ✅ Get sitters by individual service
 router.get('/service/:serviceName', getSittersByService);
-
-// Create a new booking
-router.post('/api/bookings', async (req, res) => {
-  const { sitterId, startDate, endDate, address, notes } = req.body;
-  try {
-    const booking = new BookingModel({
-      sitterId,
-      startDate,
-      endDate,
-      address,
-      notes,
-      status: 'pending', // or "confirmed" if you want
-    });
-    await booking.save();
-    res.status(201).json(booking);
-  } catch (err) {
-    res.status(500).json({ error: 'Booking failed.' });
-  }
-});
 
 module.exports = router;

@@ -62,7 +62,7 @@ const elderlyRoutes = require('./routes/elderlyRoutes');
 const sitterRoutes = require('./routes/sitterRoutes'); // 📦 Import sitterRoutes
 const otherAnimalRoutes = require('./routes/otherAnimalRoutes');
 const chatbotRoutes = require('./routes/chatbot');
-
+const bookingRoutes = require('./routes/bookingRoutes');
 // 7. API Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/plants', plantRoutes);
@@ -77,7 +77,7 @@ app.use('/api/chatbot', chatbotRoutes);
 
 // 8. Add route for sitters
 app.use('/api/sitters', sitterRoutes); // 📌 Add sitter route
-
+app.use('/api/bookings', bookingRoutes);
 // 9. Ensure the pets folder exists to store pet photos
 const petFolderPath = path.join(__dirname, 'uploads', 'pets');
 
